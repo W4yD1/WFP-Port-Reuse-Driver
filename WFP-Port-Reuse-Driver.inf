@@ -1,0 +1,51 @@
+;
+; WFP-Port-Reuse-Driver.inf
+;
+
+[Version]
+Signature   = "$Windows NT$"
+Class       = "System"
+ClassGuid   = {4d36e97d-e325-11ce-bfc1-08002be10318}
+Provider    = %ProviderName%
+DriverVer   = 09/09/2025,1.0.0.1
+CatalogFile = WFP-Port-Reuse-Driver.cat
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+
+[SourceDisksNames]
+1 = %DiskName%,,
+
+[SourceDisksFiles]
+WFP-Port-Reuse-Driver.sys = 1,,
+
+;
+; Driver installation section
+;
+[DefaultInstall.NT]
+CopyFiles = DriverCopyFiles
+
+[DriverCopyFiles]
+WFP-Port-Reuse-Driver.sys
+
+;
+; Service installation section
+;
+[DefaultInstall.NT.Services]
+AddService = %ServiceName%,,ServiceInstall
+
+[ServiceInstall]
+DisplayName    = %ServiceName%
+Description    = "WFP driver for port redirection"
+ServiceType    = 1 ; SERVICE_KERNEL_DRIVER
+StartType      = 3 ; SERVICE_DEMAND_START
+ErrorControl   = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\WFP-Port-Reuse-Driver.sys
+
+;
+; Strings section
+;
+[Strings]
+ProviderName = "W4yD1"
+DiskName     = "WFP Port Reuse Driver Installation Disk"
+ServiceName  = "WFP-Port-Reuse-Driver"
