@@ -1,0 +1,15 @@
+TARGETNAME=WFP-Port-Reuse-Driver
+TARGETTYPE=DRIVER
+TARGETPATH=obj
+
+# This is for a WDM driver, not WDF
+DRIVERTYPE=WDM
+
+SOURCES= \
+    Driver.c \
+    Callout.c \
+    Filter.c
+
+# Add necessary libraries for WFP
+TARGETLIBS=\
+    $(DDK_LIB_PATH)\fwpuclnt.lib
